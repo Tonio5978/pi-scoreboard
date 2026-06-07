@@ -8,7 +8,7 @@ team logos, scores, and a live game state in the center — and includes a small
 > Built as a weekend project and written up here:
 > **[link to blog post]**
 
-![scoreboard photo placeholder](docs/photo.jpg)
+![pi-scoreboard showing a live game](scoreboard.png)
 
 ---
 
