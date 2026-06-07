@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+
+# Virtualenv (on the Pi the venv lives alongside the code in this dir)
+.venv/
+venv/
+bin/
+include/
+lib/
+lib64
+pyvenv.cfg
+
+# Runtime data / caches (generated at runtime)
+logos/
+*.db
+
+# BDF fonts — copy from rpi-rgb-led-matrix/fonts at install time (see README)
+fonts/
+
+# OS
+.DS_Store
