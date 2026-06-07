@@ -6,7 +6,7 @@ team logos, scores, and a live game state in the center — and includes a small
 **web interface** to pick the game you're watching.
 
 > Built as a weekend project and written up here:
-> **[link to blog post]**
+> **[Building an LED Sports Scoreboard: Power Bugs, Permission Traps, and Other Joys](https://mgamble.ca/p/building-an-led-sports-scoreboard-power-bugs-permission-traps-and-other-joys)**
 
 ![pi-scoreboard showing a live game](scoreboard.png)
 
