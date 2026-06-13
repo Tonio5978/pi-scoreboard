@@ -1,12 +1,16 @@
 [Unit]
 Description=LED Sports Scoreboard
-After=network-online.target
-Wants=network-online.target
+# The Pi has no RTC; wait for the network AND a real NTP-synced clock so the
+# app fetches the correct day on boot. (Enable the wait with:
+#   sudo systemctl enable systemd-time-wait-sync.service )
+After=network-online.target time-sync.target
+Wants=network-online.target time-sync.target
 
 [Service]
 Type=simple
 User=root
 WorkingDirectory=/home/mgamble/scoreboard
+Environment=PYTHONUNBUFFERED=1
 ExecStart=/home/mgamble/scoreboard/bin/python /home/mgamble/scoreboard/scoreboard.py
 Restart=always
 RestartSec=5

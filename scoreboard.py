@@ -774,6 +774,7 @@ def main():
     idx = 0
     cur_uid = None
     applied_pin = STATE.pin()
+    cur_day = today_iso()
     last_fetch = time.monotonic()
     last_switch = time.monotonic()
     last_clock = 0.0
@@ -781,11 +782,18 @@ def main():
     while True:
         now = time.monotonic()
 
-        # Rebuild on the normal cadence, or immediately when the web pick changes.
-        if now - last_fetch >= rot.refresh or STATE.pin() != applied_pin:
+        # Rebuild on the normal cadence, when the web pick changes, or when the
+        # local date changes. The date can jump well after startup: the Pi has no
+        # RTC, so on boot it may hold a stale time until NTP syncs a few seconds
+        # later -- without this we'd stay stuck on the old day's (final) games
+        # until the next idle refresh (~15 min). Also handles midnight rollover.
+        if (now - last_fetch >= rot.refresh
+                or STATE.pin() != applied_pin
+                or today_iso() != cur_day):
             rot = build_rotation()
             last_fetch = now
             applied_pin = STATE.pin()
+            cur_day = today_iso()
             uids = [g.uid for g in rot.games]
             if cur_uid in uids:
                 idx = uids.index(cur_uid)
